@@ -1,0 +1,55 @@
+<div class="w-full h-screen flex items-center">
+  <div class="w-full flex flex-col px-6 mr-auto ml-auto" style="max-width: 530px">
+    <div class="ml-10 text-xl text-gray-500 font-medium mb-8">
+      Selecteer week
+    </div>
+    <div class="w-full flex gap-4 mb-8">
+      <div class="flex-none text-gray-500 flex items-center justify-center" inlineSVG="/assets/arrow-left.svg"
+           (click)="previousSprint()">
+      </div>
+      <div *ngFor="let offset of [0,1]" class="flex-1 rounded-lg border-2 border-green-500 cursor-pointer bg-green-400 hover:bg-opacity-80"
+           (click)="selectedWeek = (currentSprint + offset)"
+           [class.bg-opacity-0]="selectedWeek !== (currentSprint + offset)"
+           [class.bg-opacity-100]="selectedWeek === (currentSprint + offset)">
+        <div class="aspect-h-1 aspect-w-1">
+          <div class="flex flex-col justify-around items-center">
+            <div class="h-8 w-8"></div>
+            <div class="flex items-center justify-center text-xl"
+                 [class.text-white]="selectedWeek === (currentSprint + offset)"
+                 [class.text-gray-400]="selectedWeek !== (currentSprint + offset)">
+              Week {{ currentSprint + offset }}
+            </div>
+            <div
+              class="rounded-full h-8 w-8  text-white flex items-center justify-center border-2 border-green-500 bg-recognize-purple"
+              [class.bg-opacity-0]="selectedWeek !== (currentSprint + offset)"
+              [class.bg-opacity-100]="selectedWeek === (currentSprint + offset)"
+              inlineSVG="/assets/check.svg" [setSVGAttributes]="{width: 16, height: 16}">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-none text-gray-500 flex items-center" inlineSVG="/assets/arrow-right.svg"
+           (click)="nextSprint()">
+      </div>
+    </div>
+    <div class="ml-14 text-xl text-gray-500 font-medium mb-8">
+      Selecteer dagdelen
+    </div>
+    <div class="flex mb-8">
+      <div id="parts-grid" class="w-full grid gap-4 mr-10">
+        <ng-container *ngFor="let day of days">
+          <div class="flex items-center justify-center">
+            {{ day }}:
+          </div>
+          <app-custom-checkbox *ngFor="let part of dayParts" [lastChange]="selectedWeek">
+            {{ part }}
+          </app-custom-checkbox>
+        </ng-container>
+      </div>
+    </div>
+    <a routerLink="/schedule"
+       class="bg-recognize-purple-light rounded-full px-14 py-6 text-white uppercase text-xl font-medium text-center">
+      Voorkeuren opslaan
+    </a>
+  </div>
+</div>

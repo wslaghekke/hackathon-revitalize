@@ -1,0 +1,6 @@
+<div class="rounded-lg border-2 border-green-500 flex items-center justify-center cursor-pointer bg-green-400 hover:bg-opacity-80"
+     (click)="checked = !checked"
+     [class.bg-opacity-0]="!checked" [class.bg-opacity-100]="checked"
+     [class.text-gray-500]="!checked" [class.text-white]="checked">
+    <ng-content></ng-content>
+</div>
